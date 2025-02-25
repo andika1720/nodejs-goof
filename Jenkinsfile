@@ -1,5 +1,10 @@
 pipeline {
-    agent none
+    agent {
+            docker {
+                  image 'docker:dind'
+                  args '--privileged -v /var/run/docker.sock:/var/run/docker.sock'
+                }
+            }
     environment {
         DOCKERHUB_CREDENTIALS = credentials('Dockerlogin')
     }
